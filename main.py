@@ -119,57 +119,31 @@ random.shuffle(images)  # Barajar las imágenes para mostrarlas en orden aleator
 # Mostrar las imágenes en un grid de 6x4
 st.write("### Selecciona hasta 5 imágenes:")
 
+# Lista para almacenar las imágenes seleccionadas
 selected_images = []
+
+# Crear una cuadrícula de 6x4 usando st.columns
 cols = st.columns(4)
 
-# Mostrar el contador de imágenes seleccionadas
-st.write(f"Has seleccionado {len(selected_images)} de 5 imágenes.")
+# Recorrer las imágenes y colocarlas en la cuadrícula
+for idx, (label, img) in enumerate(images.items()):
+    resized_img = img.resize((220, 220))  # Redimensionar la imagen a 220x220 píxeles
 
-# Controlar la selección de imágenes
-disabled = False
-for i, (dataset, image) in enumerate(images):
-    if len(selected_images) >= 5:
-        disabled = True
-    with cols[i % 4]:
-        img = Image.open(image).resize((220, 220))
-        # Proporcionar una etiqueta vacía para evitar la advertencia
-        checkbox_key = f"checkbox_{i}"
-        if st.checkbox("", key=checkbox_key, disabled=disabled):
-            selected_images.append((dataset, img))
-        st.image(img, use_column_width=True)
-
-# Actualizar el contador de imágenes seleccionadas
-st.write(f"Has seleccionado {len(selected_images)} de 5 imágenes.")
-
-# Deshabilitar el botón de enviar hasta que se seleccionen 5 imágenes
-if len(selected_images) == 5:
-    st.write("### Has seleccionado 5 imágenes. Ahora puedes enviarlas al GAN para procesarlas.")
-    st.write("Al hacer clic en el botón de abajo, el sistema identificará el dataset dominante y lo enviará al modelo GAN para generar nuevas imágenes basadas en tu selección.")
-
-    if st.button("Enviar al GAN"):
-        # Mostrar un spinner mientras se procesa la selección
-        with st.spinner("Procesando imágenes..."):
-            # Calcular el porcentaje de selección por dataset
-            dataset_count = Counter([dataset for dataset, _ in selected_images])
-            total_selected = sum(dataset_count.values())
-            
-            # Calcular el dataset con mayor porcentaje
-            max_percentage = max(dataset_count.values()) / total_selected * 100
-            top_datasets = [dataset for dataset, count in dataset_count.items() if count / total_selected * 100 == max_percentage]
-
-            # Seleccionar el dataset que se pasará al GAN
-            if len(top_datasets) == 1:
-                selected_dataset = top_datasets[0]
+    # Mostrar la imagen y el checkbox en la columna correspondiente
+    with cols[idx % 4]:
+        if st.checkbox("", key=label):
+            if len(selected_images) < 5:
+                selected_images.append(label)
             else:
-                selected_dataset = random.choice(top_datasets)
-            
-            st.write(f"El dataset con más imágenes seleccionadas es: {selected_dataset}")
+                st.warning("Ya has seleccionado 5 imágenes.")
 
-            # Mostrar las imágenes del dataset ganador
-            st.write("Imágenes seleccionadas del dataset ganador:")
-            for dataset, img in selected_images:
-                if dataset == selected_dataset:
-                    st.image(img.resize((220, 220)), use_column_width=220)
+        st.image(resized_img, use_column_width=True)
 
+# Mostrar cuántas imágenes se han seleccionado, fuera del bucle para evitar duplicación
+st.write(f"Has seleccionado {len(selected_images)} de 5 imágenes.")
+
+# Validar si ya se han seleccionado 5 imágenes
+if len(selected_images) == 5:
+    st.write("Puedes proceder con el siguiente paso.")
 else:
-    st.write("Por favor, selecciona exactamente 5 imágenes.")
+    st.write("Selecciona hasta 5 imágenes para continuar.")
