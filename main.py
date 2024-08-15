@@ -63,20 +63,13 @@ st.markdown("""
             
 ### Objetivo del Proyecto
 El proyecto busca desarrollar una prueba de concepto (PoC) que demuestre cómo las Redes Generativas Antagónicas (GAN) 
-pueden ser utilizadas para crear contenido visual terapéutico adaptativo, diseñado específicamente para abordar las 
-necesidades emocionales y cognitivas individuales de los pacientes. Al proporcionar una herramienta que permita a 
-los terapeutas personalizar las sesiones de terapia de manera más precisa y dinámica, se espera mejorar los resultados 
+pueden ser utilizadas para crear contenido visual terapéutico adaptativo, diseñado para en un futuro abordar las 
+posibles necesidades emocionales y cognitivas individuales de los pacientes. Este PoC de GAN simulara proporcionar una herramienta que permita a 
+los terapeutas personalizar las sesiones de terapia de manera más precisa y dinámica, se esperaria mejorara los resultados 
 terapéuticos y aumentar la satisfacción de los pacientes. El sistema buscará no solo producir contenido adaptado a las 
 necesidades individuales de los pacientes, sino también integrar una interfaz interactiva que permita a terapeutas y pacientes 
-interactuar de manera efectiva con la plataforma, proporcionándoles herramientas adicionales para mejorar la experiencia terapéutica. 
+interactuar de manera efectiva con la plataforma.
 
-### Propósito del Proyecto
-El propósito de este proyecto es abordar una necesidad crítica en el campo de la salud mental: 
-la falta de personalización efectiva en las intervenciones terapéuticas. Actualmente, 
-los enfoques tradicionales de la terapia cognitivo-conductual (CBT) a menudo no logran 
-adaptarse plenamente a las diversas necesidades individuales de los pacientes. 
-Esto puede limitar la eficacia del tratamiento, provocando que algunos pacientes no obtengan los beneficios
-esperados y, en algunos casos, abandonen la terapia. 
 
 ### ¿Qué es un GAN?
 Un GAN es un tipo de modelo de aprendizaje profundo compuesto por dos redes neuronales: un **generador** y un **discriminador**. 
@@ -88,11 +81,10 @@ A medida que el GAN entrena, el generador mejora en crear imágenes más realist
 La aplicación de Terapia Cognitiva con GAN está diseñada para ayudar a los terapeutas y pacientes a personalizar el 
 contenido terapéutico a través de la selección de imágenes que mejor representen sus emociones, 
 experiencias o preferencias. A continuación, se describe cómo utilizar la aplicación:
-1. *Selección de Imágenes:* El usuario debe seleccionar exactamente 5 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes para su sesión de terapia.
-2. *Confirmación de la selección:* Una vez seleccionadas las 5 imágenes, el usuario puede revisar su selección. Las imágenes seleccionadas se mostrarán en una vista previa ampliada, permitiendo al usuario asegurarse de que estas son las que desean enviar al modelo GAN.
-3. *Procesamiento por el GAN:* El modelo GAN generará una imagen aleatoria basada en el dataset ganador.
-4. *Visualización y Uso del Contenido Generado:* La imagen generada por el modelo GAN se mostrará en la pantalla. Esta imagen pretende a futuro ser utilizada por el terapeuta y el paciente para explorar temas adicionales, reflexionar sobre emociones o como punto de partida para actividades terapéuticas personalizadas.
-</div>
+1. *Selección de Imágenes:* El usuario debe seleccionar exactamente 5 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes segun su estado actual.
+2. *Confirmación de la selección:* Una vez seleccionadas las 5 imágenes, el usuario podra visualiazr con checkbox las imagenes que fueron seleccionadas.
+3. *Procesamiento por el GAN:* El modelo GAN generará una imagen aleatoria basada en la tendencia de las imagenes.
+4. *Visualización y Uso del Contenido Generado:* La imagen generada por el modelo GAN se mostrará en la pantalla. 
 """, unsafe_allow_html=True)
 
 # Cargar las imágenes del grid
