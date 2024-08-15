@@ -1,70 +1,28 @@
 import streamlit as st
 from PIL import Image
 import random
-from collections import Counter
 
-# CSS personalizado para cambiar el color de fondo, el color del texto y justificar el texto
-page_bg_css = """
+# CSS personalizado para justificar el texto
+justify_text_css = """
 <style>
-/* Cambiar color de fondo */
-[data-testid="stAppViewContainer"] {
-    background-color: #FFF9E3;  /* Cambia este color al que prefieras */
-}
-
-/* Cambiar color del texto */
-body, [data-testid="stAppViewContainer"] {
-    color: #040423;  /* Cambia este color al que prefieras */
-}
-
-[data-testid="stHeader"] {
-    background-color: rgba(0, 0, 0, 0);  /* Esto oculta el fondo del header */
-}
-
-[data-testid="stSidebar"] {
-    background-color: #040423;  /* Cambia el color del sidebar */
-}
-
-/* Cambiar color de los encabezados */
-h1, h2, h3, h4, h5, h6 {
-    color: #333333;  /* Cambia este color al que prefieras, #333333 es un gris oscuro */
-}
-
-/* Justificar el texto */
-.justified-text {
-    text-align: justify;
-}
-
-/* Estilizar el botón */
-div.stButton > button {
-    background-color: #FFB6C1; /* Color de fondo del botón (rosa claro pastel) */
-    color: #FFFFFF; /* Color del texto */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    border-radius: 12px; /* Bordes redondeados */
-    border: 2px solid #FF69B4; /* Borde del botón (rosa más fuerte pastel) */
-    font-size: 16px; /* Tamaño de la fuente */
-    font-weight: bold; /* Texto en negrita */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del botón */
-    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
-}
-div.stButton > button:hover {
-    background-color: #FFC0CB; /* Color de fondo al pasar el ratón (rosa pastel más claro) */
-    border-color: #FF69B4; /* Mantener el color del borde al pasar el ratón */
-}
+    .justified-text {
+        text-align: justify;
+    }
 </style>
 """
-# Insertar el CSS en la aplicación
-st.markdown(page_bg_css, unsafe_allow_html=True)
 
-# Explicación del proyecto
+# Insertar el CSS en la aplicación
+st.markdown(justify_text_css, unsafe_allow_html=True)
+
+# Título de la aplicación
 st.title("GAN para terapia cognitiva y salud mental")
-st.write("Proyecto para la clase de Computacion Cognitiva.")
+st.write("Proyecto para la clase de Computación Cognitiva.")
 st.write("Dr. Harold Vazquez")
 st.write("Integrantes: Steven Newton, Enrique Soto, Diego Hernandez")
 
-# Descripción del proyecto con texto justificado
+# Descripción
 st.markdown("""
 <div class="justified-text">
-            
 ### Objetivo del Proyecto
 El proyecto busca desarrollar una prueba de concepto (PoC) que demuestre cómo las Redes Generativas Antagónicas (GAN) 
 pueden ser utilizadas para crear contenido visual terapéutico adaptativo, diseñado específicamente para abordar las 
@@ -75,7 +33,7 @@ individuales de los pacientes, sino también integrar una interfaz interactiva q
 interactuar de manera efectiva con la plataforma, proporcionándoles herramientas adicionales 
 para mejorar la experiencia terapéutica. 
 
-### Propósito  del Proyecto
+### Propósito del Proyecto
 El propósito de este proyecto es abordar una necesidad crítica en el campo de la salud mental: 
 la falta de personalización efectiva en las intervenciones terapéuticas. Actualmente, 
 los enfoques tradicionales de la terapia cognitivo-conductual (CBT) a menudo no logran 
@@ -93,33 +51,47 @@ A medida que el GAN entrena, el generador mejora en crear imágenes más realist
 La aplicación de Terapia Cognitiva con GAN está diseñada para ayudar a los terapeutas y pacientes a personalizar el 
 contenido terapéutico a través de la selección de imágenes que mejor representen sus emociones, 
 experiencias o preferencias. A continuación, se describe cómo utilizar la aplicación:
-1. *Selección de Imágenes:*. El usuario debe seleccionar exactamente 5 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes para su sesión de terapia.
-2. *Confirmación de la selección*: Una vez seleccionadas las 5 imágenes, el usuario puede revisar su selección. Las imágenes seleccionadas se mostrarán en una vista previa ampliada, permitiendo al usuario asegurarse de que estas son las que desean enviar al modelo GAN.
-3. *Procesamiento por el GAN*: El modelo GAN generará una serie de nuevas imágenes que reflejan los temas, colores y emociones presentes en las imágenes seleccionadas. Estas imágenes se mostrarán al usuario al finalizar el proceso.
-4. *Visualización y Uso del Contenido Generado*: Las imágenes generadas por el modelo GAN se mostrarán en la pantalla. Estas imágenes pueden ser utilizadas por el terapeuta y el paciente para explorar temas adicionales, reflexionar sobre emociones o como punto de partida para actividades terapéuticas personalizadas.
+1. **Selección de Imágenes**: El usuario debe seleccionar exactamente 5 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes para su sesión de terapia.
+2. **Confirmación de la selección**: Una vez seleccionadas las 5 imágenes, el usuario puede revisar su selección. Las imágenes seleccionadas se mostrarán en una vista previa ampliada, permitiendo al usuario asegurarse de que estas son las que desean enviar al modelo GAN.
+3. **Procesamiento por el GAN**: El modelo GAN generará una serie de nuevas imágenes que reflejan los temas, colores y emociones presentes en las imágenes seleccionadas. Estas imágenes se mostrarán al usuario al finalizar el proceso.
+4. **Visualización y Uso del Contenido Generado**: Las imágenes generadas por el modelo GAN se mostrarán en la pantalla. Estas imágenes pueden ser utilizadas por el terapeuta y el paciente para explorar temas adicionales, reflexionar sobre emociones o como punto de partida para actividades terapéuticas personalizadas.
             
-El modelo producirá nuevas imágenes que tratan de imitar la imagen de referencia o crean variaciones completamente nuevas.
+El modelo producirá nuevas imágenes que tratan de imitar la imagen de referencia o crear variaciones completamente nuevas.
 </div>
 """, unsafe_allow_html=True)
 
-# Definir los datasets y sus imágenes
-datasets = {
-    "Mariposas": ["images/gridImages/butterfly1.png", "images/gridImages/butterfly2.png", "images/gridImages/butterfly3.png", "images/gridImages/butterfly4.png"],
-    "Wildlife Animals": ["images/gridImages/wildlife1.png", "images/gridImages/wildlife2.png", "images/gridImages/wildlife3.png", "images/gridImages/wildlife4.png"],
-    "Art Images": ["images/gridImages/art1.png", "images/gridImages/art2.png", "images/gridImages/art3.png", "images/gridImages/art4.png"],
-    "Pets": ["images/gridImages/pet1.png", "images/gridImages/pet2.png", "images/gridImages/pet3.png", "images/gridImages/pet4.png"],
-    "Flowers": ["images/gridImages/flower1.png", "images/gridImages/flower2.png", "images/gridImages/flower3.png", "images/gridImages/flower4.png"],
-    "Human Face Emotions": ["images/gridImages/emotion1.png", "images/gridImages/emotion2.png", "images/gridImages/emotion3.png", "images/gridImages/emotion4.png"]
+# Cargar las imágenes
+images = {
+    "Image 1": Image.open("images/gridImages/image1.jpg"),
+    "Image 2": Image.open("images/gridImages/image2.jpg"),
+    "Image 3": Image.open("images/gridImages/image3.jpg"),
+    "Image 4": Image.open("images/gridImages/image4.jpg"),
+    "Image 5": Image.open("images/gridImages/image5.jpg"),
+    "Image 6": Image.open("images/gridImages/image6.jpg"),
+    "Image 7": Image.open("images/gridImages/image7.jpg"),
+    "Image 8": Image.open("images/gridImages/image8.jpg"),
+    "Image 9": Image.open("images/gridImages/image9.jpg"),
+    "Image 10": Image.open("images/gridImages/image10.jpg"),
+    "Image 11": Image.open("images/gridImages/image11.jpg"),
+    "Image 12": Image.open("images/gridImages/image12.jpg"),
+    "Image 13": Image.open("images/gridImages/image13.jpg"),
+    "Image 14": Image.open("images/gridImages/image14.jpg"),
+    "Image 15": Image.open("images/gridImages/image15.jpg"),
+    "Image 16": Image.open("images/gridImages/image16.jpg"),
+    "Image 17": Image.open("images/gridImages/image17.jpg"),
+    "Image 18": Image.open("images/gridImages/image18.jpg"),
+    "Image 19": Image.open("images/gridImages/image19.jpg"),
+    "Image 20": Image.open("images/gridImages/image20.jpg"),
+    "Image 21": Image.open("images/gridImages/image21.jpg"),
+    "Image 22": Image.open("images/gridImages/image22.jpg"),
+    "Image 23": Image.open("images/gridImages/image23.jpg"),
+    "Image 24": Image.open("images/gridImages/image24.jpg"),
 }
 
-# Crear una lista de todas las imágenes con sus datasets correspondientes
-images = [(dataset, image) for dataset, images in datasets.items() for image in images]
-random.shuffle(images)  # Barajar las imágenes para mostrarlas en orden aleatorio
-
-# Mostrar las imágenes en un grid de 6x4
+# Mostrar las imágenes en una cuadrícula 6x4 con checkboxes
 st.write("### Selecciona hasta 5 imágenes:")
 
-# Lista para almacenar las imágenes seleccionadas
+# Listas para almacenar las imágenes seleccionadas
 selected_images = []
 
 # Crear una cuadrícula de 6x4 usando st.columns
@@ -127,23 +99,19 @@ cols = st.columns(4)
 
 # Recorrer las imágenes y colocarlas en la cuadrícula
 for idx, (label, img) in enumerate(images.items()):
-    resized_img = img.resize((220, 220))  # Redimensionar la imagen a 220x220 píxeles
-
-    # Mostrar la imagen y el checkbox en la columna correspondiente
     with cols[idx % 4]:
         if st.checkbox("", key=label):
-            if len(selected_images) < 5:
-                selected_images.append(label)
-            else:
-                st.warning("Ya has seleccionado 5 imágenes.")
+            selected_images.append(label)
+        st.image(img.resize((220, 220)), use_column_width=True)
 
-        st.image(resized_img, use_column_width=True)
-
-# Mostrar cuántas imágenes se han seleccionado, fuera del bucle para evitar duplicación
+# Validar la selección y mostrar el conteo de imágenes seleccionadas
 st.write(f"Has seleccionado {len(selected_images)} de 5 imágenes.")
 
-# Validar si ya se han seleccionado 5 imágenes
+# Si se seleccionan 5 imágenes, se habilita el botón para continuar
 if len(selected_images) == 5:
-    st.write("Puedes proceder con el siguiente paso.")
+    st.write("Puedes proceder a enviar estas imágenes al modelo GAN.")
+    if st.button("Enviar al GAN"):
+        # Aquí se colocará la lógica para el GAN
+        st.write(f"Estas son las imágenes seleccionadas: {selected_images}")
 else:
-    st.write("Selecciona hasta 5 imágenes para continuar.")
+    st.write("Por favor, selecciona exactamente 5 imágenes para continuar.")
