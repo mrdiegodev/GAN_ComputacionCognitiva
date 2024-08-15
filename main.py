@@ -130,10 +130,10 @@ if len(selected_images) == 5:
     st.write(f"Has seleccionado 5 de 5 imágenes.")
     if len(winning_datasets) == 1:
         winning_dataset = winning_datasets[0]
-        st.write(f"El dataset ganador es: {winning_dataset}")
+        #st.write(f"El dataset ganador es: {winning_dataset}")
     else:
         winning_dataset = random.choice(winning_datasets)
-        st.write(f"El dataset ganador es: {winning_dataset} (Empate, seleccionado al azar)")
+        #st.write(f"El dataset ganador es: {winning_dataset} (Empate, seleccionado al azar)")
 
     # Selección aleatoria de una imagen generada
     gan_image_folder = f"images/PretrainedGanImg/{winning_dataset}"
@@ -142,7 +142,7 @@ if len(selected_images) == 5:
     gan_image_path = os.path.join(gan_image_folder, selected_gan_image)
 
     if st.button("Enviar al GAN"):
-        st.write("El GAN procesará las imágenes del dataset ganador y generará una nueva imagen.")
+        st.write("El GAN procesará las imágenes del dataset y generará una nueva imagen.")
         st.image(gan_image_path, caption="Imagen generada por el GAN", use_column_width=True)
 
 elif len(selected_images) > 5:
