@@ -78,9 +78,9 @@ Un GAN es un tipo de modelo de aprendizaje profundo compuesto por dos redes neur
 A medida que el GAN entrena, el generador mejora en crear imágenes más realistas, mientras que el discriminador mejora en distinguir las falsas de las reales.
 
 ### Uso de la Aplicación
-La aplicación de Terapia Cognitiva con GAN está diseñada para ayudar a los terapeutas y pacientes a personalizar el 
-contenido terapéutico a través de la selección de imágenes que mejor representen sus emociones, 
-experiencias o preferencias. A continuación, se describe cómo utilizar la aplicación:
+Este es un PoC para una aplicación futura de Terapia Cognitiva con GAN está diseñada para ayudar a los terapeutas y pacientes a personalizar el 
+contenido terapéutico a través de la selección de imágenes que mejor representen sus emociones. La aplicacion estará limitada a generar imagenes dependiendo de la entrada 
+A continuación, se describe cómo utilizar la aplicación:
 1. *Selección de Imágenes:* El usuario debe seleccionar exactamente 5 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes segun su estado actual.
 2. *Confirmación de la selección:* Una vez seleccionadas las 5 imágenes, el usuario podra visualiazr con checkbox las imagenes que fueron seleccionadas.
 3. *Procesamiento por el GAN:* El modelo GAN generará una imagen aleatoria basada en la tendencia de las imagenes.
@@ -98,7 +98,7 @@ images = {
 
 # Mostrar las imágenes en un grid de 4x4
 selected_images = []
-st.write("### ¿Con que imagenes te sientes identificado hoy? Selecciona hasta 5 imágenes:")
+st.write("### ¿Con que imagenes te sientes identificado hoy? La GAN generara una imagen para ti. Selecciona hasta 5 imágenes:")
 
 cols = st.columns(4)
 
