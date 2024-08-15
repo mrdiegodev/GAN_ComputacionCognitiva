@@ -93,8 +93,8 @@ A medida que el GAN entrena, el generador mejora en crear imágenes más realist
 La aplicación de Terapia Cognitiva con GAN está diseñada para ayudar a los terapeutas y pacientes a personalizar el 
 contenido terapéutico a través de la selección de imágenes que mejor representen sus emociones, 
 experiencias o preferencias. A continuación, se describe cómo utilizar la aplicación:
-1. *Selección de Imágenes:*. El usuario debe seleccionar exactamente 3 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes para su sesión de terapia.
-2. *Confirmación de la selección*: Una vez seleccionadas las 3 imágenes, el usuario puede revisar su selección. Las imágenes seleccionadas se mostrarán en una vista previa ampliada, permitiendo al usuario asegurarse de que estas son las que desean enviar al modelo GAN.
+1. *Selección de Imágenes:*. El usuario debe seleccionar exactamente 5 imágenes haciendo clic en las casillas de verificación correspondientes a las imágenes que más resuenen con sus sentimientos o que consideren más relevantes para su sesión de terapia.
+2. *Confirmación de la selección*: Una vez seleccionadas las 5 imágenes, el usuario puede revisar su selección. Las imágenes seleccionadas se mostrarán en una vista previa ampliada, permitiendo al usuario asegurarse de que estas son las que desean enviar al modelo GAN.
 3. *Procesamiento por el GAN*: El modelo GAN generará una serie de nuevas imágenes que reflejan los temas, colores y emociones presentes en las imágenes seleccionadas. Estas imágenes se mostrarán al usuario al finalizar el proceso.
 4. *Visualización y Uso del Contenido Generado*: Las imágenes generadas por el modelo GAN se mostrarán en la pantalla. Estas imágenes pueden ser utilizadas por el terapeuta y el paciente para explorar temas adicionales, reflexionar sobre emociones o como punto de partida para actividades terapéuticas personalizadas.
             
@@ -133,7 +133,8 @@ for i, (dataset, image) in enumerate(images):
     with cols[i % 4]:
         img = Image.open(image).resize((220, 220))
         # Proporcionar una etiqueta vacía para evitar la advertencia
-        if st.checkbox(" ", key=image, disabled=disabled):
+        checkbox_key = f"checkbox_{i}"
+        if st.checkbox("", key=checkbox_key, disabled=disabled):
             selected_images.append((dataset, img))
         st.image(img, use_column_width=True)
 
